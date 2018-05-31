@@ -1,0 +1,506 @@
+---
+title: "Generate Figures"
+author: "Zach"
+date: 2018-05-19
+output: 
+  github_document:
+    toc: true
+---
+
+## Setup and Wrangling
+<!-- ----------------------------------------------------------------------- -->
+
+```{r setup, include=FALSE}
+# knitr options
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r settings, echo=FALSE}
+library(tidyverse)
+
+## Parameters: Data ------------------------------------------------------------
+# Extension
+ext <- "eps"
+asp_ratio <- 3 / 4
+img_width <- 5
+img_height <- img_width * asp_ratio
+
+# Data directory
+dir_data <- "~/Git/mat-stat-uq/data"
+# Find all the data files
+files_all <- 
+  tibble(
+    files = list.files(dir_data, full.names = TRUE)
+  ) %>% 
+  mutate(
+    name = str_sub(str_extract(files, "[^/]+\\."), 1, -2)
+  )
+
+# Beam directory
+dir_beam      <- "~/Git/mat-stat-uq/code/beam/results/"
+file_beam_out <- "out.txt"
+subdir_beam   <- c("bv/", "md_ldm/", "mip_ldm/", "pi/")
+subdir_method <- c("bv/" = "bv", "md_ldm/" = "mil", "mip_ldm/" = "mip", "pi/" = "pi")
+# subdir_beam   <- c("bv/", "md_ldm/", "mip_ldm/")
+# subdir_method <- c("bv/" = "bv", "md_ldm/" = "mil", "mip_ldm/" = "mip")
+
+beam_rel     <- 1 - 0.00135 # Desired reliability in optimization problem
+beam_con     <- 0.95        # Desired confidence level
+beam_pop     <- 0.99        # Desired population fraction
+beam_entries <- 10          # Number of entries (lines) per case in a result file
+beam_samp    <- 40          # Number of replications for statistics
+# beam_samp    <- 1         # Number of replications for statistics
+
+zc_one <- qnorm(beam_con)
+zc_two <- -qnorm((1 - beam_con) / 2)
+
+## Parameters: Aesthetics ------------------------------------------------------
+
+# Named color palette
+cbPalette <- c(
+  "bv"  = "#000000", 
+  "pi"  = "#E69F00", 
+  
+  "mil" = "#56B4E9", 
+  "mil2" = "#F0E442", 
+  "mil3" = "#0072B2", 
+  "mil4" = "#009E73", 
+  "mil5" = "#F0E442", 
+  
+  "mip" = "#009E73", 
+  "mip3" = "#F0E442", 
+  "mip4" = "#0072B2", 
+  "mip5" = "#D55E00", 
+  
+  "pri" = "#CC79A7",
+  "pri3" = "#CC79A7",
+  "pri4" = "#CC79A7",
+  "pri5" = "#CC79A7"
+)
+# Named labels
+colLabels <- c(
+  "bv"  = "A-basis value",
+  "pi"  = "Plug-in",
+  "mil" = "MIL",
+  "mil2" = "MIL; L = 100",
+  "mil3" = "MIL; L = 1,000",
+  "mil4" = "MIL; L = 10,000",
+  "mil5" = "MIL; L = 100,000",
+  
+  "mip" = "MIP",
+  "mip3" = "MIP; L = 1,000",
+  "mip4" = "MIP; L = 10,000",
+  "mip5" = "MIP; L = 100,000",
+  
+  "pri" = "PRI",
+  "pri3" = "PRI; L = 1,000",
+  "pri4" = "PRI; L = 10,000",
+  "pri5" = "PRI; L = 100,000"
+)
+
+## Helper functions ------------------------------------------------------------
+base_breaks <- function(n = 10){
+    function(x) {
+        axisTicks(log10(range(x, na.rm = TRUE)), log = TRUE, n = n)
+    }
+}
+```
+
+Let's check which files were found.
+
+```{r check_files}
+files_all
+```
+
+Load and wrangle all the files in `/data/`.
+
+```{r load_and_wrangle, echo=FALSE}
+# Define load function for map()
+load_fcn <- function(filename) {
+  # Read and wrangle
+  df_base <- 
+    read_csv(filename) %>% 
+    select(N, C, P, R, everything()) %>% 
+    select(-X1) %>% 
+    gather(key = "idet", value = "value", matches("^[M|R]_")) %>% 
+    separate(idet, into = c("type", "method", "stat"), sep = "_") %>% 
+    spread(key = stat, value = value)
+  
+  # Compute failure probabilities
+  df_fail <- 
+    df_base %>% 
+    filter(type == "R") %>% 
+    mutate(
+      type = "F",
+      hi = 1 - hi,
+      lo = 1 - lo,
+      mu = 1 - mu
+    )
+  
+  # Bind and keep the name
+  df_base %>% 
+    bind_rows(df_fail) %>% 
+    structure(name = str_extract(filename, "[^/]+\\."))
+}
+
+# Load all the files to a master tibble
+list_df <- 
+  tibble(
+    data = map(files_all$files, load_fcn),
+    name = files_all$name
+  )
+```
+
+Next, let's load the beam result files. These are in a different format, and have more than one reliability constraint; thus we'll need to treat them differently.
+
+```{r}
+# Define loading function
+load_beam <- function(subdir) {
+  # Load the files
+  df_res <- 
+    str_c(dir_beam, subdir, file_beam_out) %>% 
+    read_delim(
+      delim = ":",
+      col_names = c(
+        "type",
+        "value"
+      ),
+      col_types = cols(
+        type = col_character(),
+        value = col_number()
+      )
+    )
+  
+  # Remove the exact solution from the top
+  objective_exact <- df_res %>% slice(1) %>% pull(value)
+  
+  df_res <- 
+    df_res %>% 
+    slice(-1) %>% 
+    mutate(
+      type = str_replace_all(type, "[:punct:]", ""),
+      type = tolower(str_replace_all(type, "\\s+", "_"))
+    )
+  
+  # Define helper functions and compute parameters
+  total <- dim(df_res)[1]
+  wid <- as.integer(total / beam_entries)
+  slc <- c(0:(wid - 1))
+  
+  make_row <- function(idx) {
+    df_res %>% 
+      slice((idx * beam_entries + 1):((idx+1) * beam_entries)) %>% 
+      spread(key = type, value = value)
+  }
+  
+  # `spread()` to get one `sample_count` per row
+  df_res <- 
+    map_dfr(slc, make_row) 
+    
+  # Mutate to compute statistics
+  # Note that the `sd` terms in the data are actually standard errors...
+  df_res <-
+    df_res %>%
+    mutate(
+      R = beam_rel,
+      C = beam_con,
+      P = beam_pop,
+      method = subdir_method[[subdir]],
+      
+      M_mu = (objective_mean - objective_exact) / objective_exact,
+      M_lo = (objective_mean - zc_one * objective_sd - objective_exact) / objective_exact,
+      M_hi = (objective_mean + zc_one * objective_sd - objective_exact) / objective_exact,
+      
+      R_d_mu = reliability_disp_mean,
+      R_d_lo = reliability_disp_mean - zc_one * reliability_disp_sd,
+      R_d_hi = reliability_disp_mean + zc_one * reliability_disp_sd,
+      
+      R_s_mu = reliability_stress_mean,
+      R_s_lo = reliability_stress_mean - zc_one * reliability_stress_sd,
+      R_s_hi = reliability_stress_mean + zc_one * reliability_stress_sd,
+      
+      F_d_mu = 1 - R_d_mu,
+      F_d_lo = 1 - R_d_lo,
+      F_d_hi = 1 - R_d_hi,
+      
+      F_s_mu = 1 - R_s_mu,
+      F_s_lo = 1 - R_s_lo,
+      F_s_hi = 1 - R_s_hi
+    ) 
+  
+  # Gather, code, then spread
+  df_res <- 
+    df_res %>% 
+    rename(N = sample_count) %>% 
+    select_if(!str_detect(names(.), "(objective|reliability)")) %>% 
+    gather(key = "idet", value = "value", M_mu:F_s_hi) %>% 
+    extract(idet, into = c("type", "stat"), regex = "^(.+)_(\\w+)$") %>% 
+    spread(key = stat, value = value)
+}
+
+## Load all
+df_beam <- 
+  map_dfr(subdir_beam, load_beam) %>% 
+  glimpse()
+```
+
+
+## Figure Aesthetics
+<!-- ----------------------------------------------------------------------- -->
+Here we define the figure specifications.
+
+```{r}
+# Common theme settings
+theme_common <- function() {
+  theme_minimal() %+replace%
+  theme(
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12),
+    axis.title.x = element_text(margin = margin(4, 4, 4, 4), size = 16),
+    axis.title.y = element_text(margin = margin(4, 4, 4, 4), size = 16, angle = 90),
+    
+    aspect.ratio = 3 / 4,
+    
+    plot.margin   = unit(c(t = +0, b = +0, r = +0, l = +0), "cm"),
+    panel.spacing = unit(c(t = +0, b = +0, r = +0, l = +0), "cm"),
+    
+    legend.text = element_text(size = 10),
+    
+    panel.grid.major = element_line(color = "grey90"),
+    panel.grid.minor = element_line(color = "grey90")
+  )
+}
+
+# Baseline margin plot
+margin_plot <- function(df) {
+  df_sort <- 
+    df %>% 
+    filter(N == max(N), type == "M") %>% 
+    select(N, method, lo) %>% 
+    arrange(desc(lo))
+  
+  df %>% 
+    filter(str_detect(type, "M")) %>% 
+    mutate(method = fct_relevel(method, df_sort$method)) %>% 
+    ggplot(aes(x = N, color = method)) +
+    geom_hline(
+      aes(yintercept = 0, linetype = "Requested"),
+      size = 1
+    ) +
+    geom_line(aes(y = mu, linetype = "Mean") ) + 
+    scale_y_continuous(
+      labels = scales::percent
+    ) +
+    scale_x_log10(
+      labels = scales::trans_format("log10", scales::math_format(10^.x))
+    ) +
+    scale_color_manual(
+      name = "Method",
+      values = cbPalette,
+      labels = colLabels
+    ) +
+    scale_linetype_manual(
+      name = "Type",
+      values = c("Requested" = 2, "Mean" = 1, "CI" = 3)
+    ) +
+    theme_common() +
+    labs(
+      x = "Sample Count (m)",
+      y = "Effective Margin"
+    )
+}
+
+# Baseline margin plot
+failure_plot <- function(df) {
+  R_target <- min(df$R)
+  
+  df_sort <- 
+    df %>% 
+    filter(N == max(N), str_detect(type, "F")) %>% 
+    select(N, method, lo) %>% 
+    arrange(desc(lo))
+  
+  df %>% 
+    filter(str_detect(type, "F")) %>% 
+    mutate(method = fct_relevel(method, df_sort$method)) %>% 
+    ggplot(aes(x = N, color = method)) +
+    geom_hline(
+      aes(yintercept = 1 - R_target, linetype = "Requested"),
+      size = 1
+    ) +
+    geom_line(aes(y = mu, linetype = "Mean")) + 
+    scale_y_log10(
+      breaks = 10 ^ (-14:0),
+      labels = scales::trans_format("log10", scales::math_format(10^.x))
+    ) +
+    scale_x_log10(
+      labels = scales::trans_format("log10", scales::math_format(10^.x))
+    ) +
+    scale_color_manual(
+      name = "Method",
+      values = cbPalette,
+      labels = colLabels
+    ) +
+    scale_linetype_manual(
+      name = "Type",
+      values = c("Requested" = 2, "Mean" = 1, "CI" = 3)
+    ) +
+    theme_common() +
+    labs(
+      x = "Sample Count (m)",
+      y = "Effective Failure Chance"
+    )
+}
+
+# Add two-sided CI
+ci_two <- function(plt) {
+  plt +
+  geom_ribbon(
+    aes(ymin = lo, ymax = hi, color = method, group = method, linetype = "CI"), 
+    alpha = 1 / 5, 
+    fill = "grey80"
+  )
+}
+
+# Add one-sided CI
+ci_one <- function(plt) {
+  plt +
+  geom_ribbon(
+    aes(ymin = lo, ymax = mu, color = method, group = method, linetype = "CI"), 
+    alpha = 1 / 5, 
+    fill = "grey80"
+  )
+}
+
+# Test the figures
+name_sel <- "an_mil_c0"
+
+df_sel <- 
+  list_df %>% 
+  filter(name == name_sel) %>% 
+  .$data
+
+df_sel[[1]] %>% 
+  margin_plot() %>%
+  ci_one()
+
+df_sel[[1]] %>%
+  failure_plot() %>%
+  ci_one()
+```
+
+## Figure Generation
+<!-- ----------------------------------------------------------------------- -->
+
+We can handle most of the figures using the same call. We first filter out the 'special' cases, and run the remaining ones.
+
+```{r}
+# Get all the common (simple) files
+list_common <- 
+  list_df %>% 
+  filter(!str_detect(name, "an_tension")) %>% 
+  filter(!str_detect(name, "mc_mip"))
+
+# Define what to do with them
+gen_margin_common <- function(df) {
+  df %>% 
+    margin_plot() %>% 
+    ci_one() %>% 
+    
+  ggsave(filename = str_c("../../images/M_", attr(df, "name"), ext), height = img_height, width = img_width, units = "in")
+}
+
+gen_failure_common <- function(df) {
+  df %>% 
+    failure_plot() %>% 
+    ci_one() %>% 
+    
+  ggsave(filename = str_c("../../images/F_", attr(df, "name"), ext), height = img_height, width = img_width, units = "in")
+}
+
+# Start the reactor!
+walk(.f = gen_margin_common, .x = list_common$data)
+walk(.f = gen_failure_common, .x = list_common$data)
+```
+
+The MIP results use the same functions, but contain more results than we'd like to plot. Filter, do some re-naming, and generate figures.
+
+```{r}
+# Remove the PRI results; convergence study
+df_mip1 <- 
+  list_df %>% 
+  filter(name == "mc_mip_c0_balance") %>% 
+  .$data %>% 
+  .[[1]] %>% 
+  filter(!str_detect(method, "pri"))
+
+# Focus on high-simulation results
+df_mip2 <- 
+  list_df %>% 
+  filter(name == "mc_mip_c0") %>% 
+  .$data %>% 
+  .[[1]] %>% 
+  filter(method %in% c("mip5", "pri5"))
+
+# Generate MIP figures
+gen_margin_common(df_mip1)
+gen_margin_common(df_mip2)
+
+gen_failure_common(df_mip1)
+gen_failure_common(df_mip2)
+```
+
+The analytical tension cases use a two-sided CI; let's handle those.
+
+```{r}
+# Grab the analytical tension cases
+list_ten <- 
+  list_df %>% 
+  filter(str_detect(name, "an_tension"))
+
+# Define what to do with them
+gen_margin_ten <- function(df) {
+  df %>% 
+    margin_plot() %>% 
+    ci_two() %>% 
+    
+  ggsave(filename = str_c("../../images/M_", attr(df, "name"), ext), height = img_height, width = img_width, units = "in")
+}
+
+gen_failure_ten <- function(df) {
+  df %>% 
+    failure_plot() %>% 
+    ci_two() %>% 
+    
+  ggsave(filename = str_c("../../images/F_", attr(df, "name"), ext), height = img_height, width = img_width, units = "in")
+}
+
+# Generate the figures
+walk(.f = gen_margin_ten, .x = list_ten$data)
+walk(.f = gen_failure_ten, .x = list_ten$data)
+```
+
+Finally, let's process the cantilever beam results. These are in a still-different format, but there's really only one case, so we can do them manually.
+
+```{r}
+# First, the effective margin results only
+df_beam %>% 
+  filter(type == "M") %>% 
+  margin_plot() %>% 
+  ci_one()
+ggsave(filename = str_c("../../images/M_beam.", ext), height = img_height, width = img_width, units = "in")
+
+# Next, the two reliability plots
+df_beam %>% 
+  filter(type == "F_d") %>% 
+  failure_plot() %>% 
+  ci_one()
+ggsave(filename = str_c("../../images/F_beam_disp.", ext), height = img_height, width = img_width, units = "in")
+
+df_beam %>% 
+  filter(type == "F_s") %>% 
+  failure_plot() %>% 
+  ci_one()
+ggsave(filename = str_c("../../images/F_beam_stress.", ext), height = img_height, width = img_width, units = "in")
+```
+

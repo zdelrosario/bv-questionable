@@ -1,0 +1,26 @@
+This directory contains the necessary Python scripts to run 
+a reliability-based design optimization for the cantilevered
+beam problem. Reliabilities are estimated via Monte Carlo
+sampling and different methods of including margin are 
+available: MC+PI, MC+BV, MC+MD LDM, MC+MIP LDM
+
+Files:
+batch.py: script which can be used to run optimizations in batch
+  and save information for a selected margin approach. The user
+  can change optimization, reliability analysis properties in 
+  the main() function. The margin approach used is specified on
+  line 220 in f_list.
+optimize.py: script which contains necessary functions for 
+  running an optimization with various types of margin
+beam.py: script which contains functions unique to the canti-
+  levered beam problem
+plotCompare.py: script which plots data from various margin
+  approaches after optimizations have been run
+  
+Folders:
+optimization_results: contains data for optimizations using the 
+  plug-in approach, basis value approach, MIL LDM approach, 
+  and MIL MIP approach for sample counts of 100 and 1000.
+results: contains subfolders with sweeps through sample counts
+  for each of the four approaches
+

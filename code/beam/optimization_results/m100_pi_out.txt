@@ -1,0 +1,490 @@
+Error: IPOPT shared library failed to import
+Exact objective:   9.514024
+Exact probability: 1.350000e-03
+Exact optimal t:   3.868467
+Exact optimal w:   2.459378
+     fun: 9.51402359792891
+     jac: array([2.459378, 3.868467])
+ message: 'Optimization terminated successfully.'
+    nfev: 26
+     nit: 16
+    njev: 16
+  status: 0
+ success: True
+       x: array([3.868467, 2.459378])
+Estimated pf for Stress: 1.350000e-03
+Estimated pf for Displa: 1.350000e-03
+     fun: 9.558981911787736
+     jac: array([2.504893, 3.816123])
+ message: 'Optimization terminated successfully.'
+    nfev: 103
+     nit: 25
+    njev: 25
+  status: 0
+ success: True
+       x: array([3.816123, 2.504893])
+Estimated pf for Stress: 1.060000e-03
+Estimated pf for Displa: 5.800000e-04
+     fun: 9.547830463265115
+     jac: array([2.46812 , 3.868462])
+ message: 'Optimization terminated successfully.'
+    nfev: 106
+     nit: 24
+    njev: 24
+  status: 0
+ success: True
+       x: array([3.868462, 2.46812 ])
+Estimated pf for Stress: 1.100000e-03
+Estimated pf for Displa: 1.010000e-03
+     fun: 9.564896899808945
+     jac: array([2.478033, 3.859875])
+ message: 'Optimization terminated successfully.'
+    nfev: 27
+     nit: 14
+    njev: 14
+  status: 0
+ success: True
+       x: array([3.859863, 2.47804 ])
+Estimated pf for Stress: 1.010000e-03
+Estimated pf for Displa: 8.100000e-04
+     fun: 9.66368424793111
+     jac: array([2.50039, 3.86487])
+ message: 'Optimization terminated successfully.'
+    nfev: 42
+     nit: 10
+    njev: 10
+  status: 0
+ success: True
+       x: array([3.864869, 2.500391])
+Estimated pf for Stress: 6.100000e-04
+Estimated pf for Displa: 4.300000e-04
+     fun: 9.545059027094101
+     jac: array([2.436038, 3.918272])
+ message: 'Optimization terminated successfully.'
+    nfev: 4
+     nit: 4
+    njev: 4
+  status: 0
+ success: True
+       x: array([3.918272, 2.436038])
+Estimated pf for Stress: 1.130000e-03
+Estimated pf for Displa: 1.490000e-03
+     fun: 9.46158870607101
+     jac: array([2.510602, 3.768654])
+ message: 'Optimization terminated successfully.'
+    nfev: 16
+     nit: 9
+    njev: 9
+  status: 0
+ success: True
+       x: array([3.768133, 2.510949])
+Estimated pf for Stress: 1.870000e-03
+Estimated pf for Displa: 9.600000e-04
+     fun: 9.588011250704476
+     jac: array([2.421883, 3.958908])
+ message: 'Optimization terminated successfully.'
+    nfev: 5
+     nit: 5
+    njev: 5
+  status: 0
+ success: True
+       x: array([3.958908, 2.421883])
+Estimated pf for Stress: 8.800000e-04
+Estimated pf for Displa: 1.500000e-03
+     fun: 9.525979852159066
+     jac: array([2.486621, 3.830894])
+ message: 'Optimization terminated successfully.'
+    nfev: 21
+     nit: 8
+    njev: 8
+  status: 0
+ success: True
+       x: array([3.830894, 2.486621])
+Estimated pf for Stress: 1.250000e-03
+Estimated pf for Displa: 8.800000e-04
+     fun: 9.390297010689796
+     jac: array([2.512208, 3.737867])
+ message: 'Optimization terminated successfully.'
+    nfev: 4
+     nit: 4
+    njev: 4
+  status: 0
+ success: True
+       x: array([3.737867, 2.512208])
+Estimated pf for Stress: 2.650000e-03
+Estimated pf for Displa: 1.290000e-03
+     fun: 9.494621048818164
+     jac: array([2.518597, 3.769806])
+ message: 'Optimization terminated successfully.'
+    nfev: 5
+     nit: 4
+    njev: 4
+  status: 0
+ success: True
+       x: array([3.769806, 2.518597])
+Estimated pf for Stress: 1.470000e-03
+Estimated pf for Displa: 6.800000e-04
+     fun: 9.491919931347725
+     jac: array([2.518058, 3.769539])
+ message: 'Optimization terminated successfully.'
+    nfev: 3
+     nit: 2
+    njev: 2
+  status: 0
+ success: True
+       x: array([3.76952 , 2.518071])
+Estimated pf for Stress: 1.490000e-03
+Estimated pf for Displa: 6.800000e-04
+     fun: 9.526189151669154
+     jac: array([2.46809 , 3.859741])
+ message: 'Optimization terminated successfully.'
+    nfev: 17
+     nit: 10
+    njev: 10
+  status: 0
+ success: True
+       x: array([3.859741, 2.46809 ])
+Estimated pf for Stress: 1.260000e-03
+Estimated pf for Displa: 1.150000e-03
+     fun: 9.490905864013166
+     jac: array([2.4563  , 3.863903])
+ message: 'Optimization terminated successfully.'
+    nfev: 55
+     nit: 11
+    njev: 11
+  status: 0
+ success: True
+       x: array([3.863903, 2.4563  ])
+Estimated pf for Stress: 1.500000e-03
+Estimated pf for Displa: 1.490000e-03
+     fun: 9.624851136365956
+     jac: array([2.523578, 3.81397 ])
+ message: 'Optimization terminated successfully.'
+    nfev: 102
+     nit: 21
+    njev: 21
+  status: 0
+ success: True
+       x: array([3.81397 , 2.523578])
+Estimated pf for Stress: 7.200000e-04
+Estimated pf for Displa: 3.600000e-04
+     fun: 9.492769411212402
+     jac: array([2.521634, 3.764532])
+ message: 'Optimization terminated successfully.'
+    nfev: 151
+     nit: 31
+    njev: 31
+  status: 0
+ success: True
+       x: array([3.764532, 2.521634])
+Estimated pf for Stress: 1.480000e-03
+Estimated pf for Displa: 6.600000e-04
+     fun: 9.609215837629893
+     jac: array([2.483986, 3.868466])
+ message: 'Optimization terminated successfully.'
+    nfev: 37
+     nit: 12
+    njev: 12
+  status: 0
+ success: True
+       x: array([3.868466, 2.483986])
+Estimated pf for Stress: 7.600000e-04
+Estimated pf for Displa: 5.600000e-04
+     fun: 9.548421570432344
+     jac: array([2.47205 , 3.862552])
+ message: 'Optimization terminated successfully.'
+    nfev: 29
+     nit: 12
+    njev: 12
+  status: 0
+ success: True
+       x: array([3.862547, 2.472053])
+Estimated pf for Stress: 1.100000e-03
+Estimated pf for Displa: 9.300000e-04
+     fun: 9.53685279707875
+     jac: array([2.44007 , 3.908434])
+ message: 'Optimization terminated successfully.'
+    nfev: 4
+     nit: 4
+    njev: 4
+  status: 0
+ success: True
+       x: array([3.908434, 2.44007 ])
+Estimated pf for Stress: 1.190000e-03
+Estimated pf for Displa: 1.480000e-03
+     fun: 9.463636573661793
+     jac: array([2.481901, 3.81306 ])
+ message: 'Optimization terminated successfully.'
+    nfev: 15
+     nit: 7
+    njev: 7
+  status: 0
+ success: True
+       x: array([3.81306 , 2.481901])
+Estimated pf for Stress: 1.830000e-03
+Estimated pf for Displa: 1.280000e-03
+     fun: 9.517925298584634
+     jac: array([2.476444, 3.843384])
+ message: 'Optimization terminated successfully.'
+    nfev: 58
+     nit: 16
+    njev: 15
+  status: 0
+ success: True
+       x: array([3.843384, 2.476444])
+Estimated pf for Stress: 1.320000e-03
+Estimated pf for Displa: 1.100000e-03
+     fun: 9.489679239036853
+     jac: array([2.51473 , 3.773638])
+ message: 'Optimization terminated successfully.'
+    nfev: 25
+     nit: 11
+    njev: 11
+  status: 0
+ success: True
+       x: array([3.773638, 2.51473 ])
+Estimated pf for Stress: 1.500000e-03
+Estimated pf for Displa: 7.600000e-04
+     fun: 9.516365361023894
+     jac: array([2.516379, 3.78177 ])
+ message: 'Optimization terminated successfully.'
+    nfev: 28
+     nit: 10
+    njev: 10
+  status: 0
+ success: True
+       x: array([3.781727, 2.516408])
+Estimated pf for Stress: 1.320000e-03
+Estimated pf for Displa: 6.200000e-04
+     fun: 9.536122867788505
+     jac: array([2.493948, 3.823706])
+ message: 'Optimization terminated successfully.'
+    nfev: 20
+     nit: 11
+    njev: 11
+  status: 0
+ success: True
+       x: array([3.823706, 2.493948])
+Estimated pf for Stress: 1.220000e-03
+Estimated pf for Displa: 7.600000e-04
+     fun: 9.459076626803913
+     jac: array([2.483221, 3.809196])
+ message: 'Optimization terminated successfully.'
+    nfev: 74
+     nit: 18
+    njev: 18
+  status: 0
+ success: True
+       x: array([3.809196, 2.483221])
+Estimated pf for Stress: 1.870000e-03
+Estimated pf for Displa: 1.280000e-03
+     fun: 9.529869600184217
+     jac: array([2.474741, 3.850855])
+ message: 'Optimization terminated successfully.'
+    nfev: 26
+     nit: 14
+    njev: 14
+  status: 0
+ success: True
+       x: array([3.850855, 2.474741])
+Estimated pf for Stress: 1.240000e-03
+Estimated pf for Displa: 1.030000e-03
+     fun: 9.528619297279702
+     jac: array([2.501355, 3.809383])
+ message: 'Optimization terminated successfully.'
+    nfev: 16
+     nit: 6
+    njev: 6
+  status: 0
+ success: True
+       x: array([3.80937 , 2.501363])
+Estimated pf for Stress: 1.240000e-03
+Estimated pf for Displa: 7.100000e-04
+     fun: 9.48982539281767
+     jac: array([2.517821, 3.769062])
+ message: 'Optimization terminated successfully.'
+    nfev: 5
+     nit: 5
+    njev: 5
+  status: 0
+ success: True
+       x: array([3.769062, 2.517821])
+Estimated pf for Stress: 1.500000e-03
+Estimated pf for Displa: 7.200000e-04
+     fun: 9.51883355175042
+     jac: array([2.530291, 3.761953])
+ message: 'Optimization terminated successfully.'
+    nfev: 40
+     nit: 11
+    njev: 11
+  status: 0
+ success: True
+       x: array([3.761931, 2.530305])
+Estimated pf for Stress: 1.320000e-03
+Estimated pf for Displa: 5.600000e-04
+     fun: 9.617923720415071
+     jac: array([2.560234, 3.756658])
+ message: 'Optimization terminated successfully.'
+    nfev: 22
+     nit: 7
+    njev: 7
+  status: 0
+ success: True
+       x: array([3.75665 , 2.560239])
+Estimated pf for Stress: 7.500000e-04
+Estimated pf for Displa: 2.300000e-04
+     fun: 9.550995923649284
+     jac: array([2.468754, 3.868752])
+ message: 'Optimization terminated successfully.'
+    nfev: 20
+     nit: 10
+    njev: 10
+  status: 0
+ success: True
+       x: array([3.868752, 2.468754])
+Estimated pf for Stress: 1.090000e-03
+Estimated pf for Displa: 9.600000e-04
+     fun: 9.565614549576729
+     jac: array([2.512645, 3.806991])
+ message: 'Optimization terminated successfully.'
+    nfev: 17
+     nit: 9
+    njev: 9
+  status: 0
+ success: True
+       x: array([3.806986, 2.512648])
+Estimated pf for Stress: 1.030000e-03
+Estimated pf for Displa: 5.500000e-04
+     fun: 9.561631736332652
+     jac: array([2.480371, 3.85492 ])
+ message: 'Optimization terminated successfully.'
+    nfev: 20
+     nit: 9
+    njev: 9
+  status: 0
+ success: True
+       x: array([3.854915, 2.480374])
+Estimated pf for Stress: 1.020000e-03
+Estimated pf for Displa: 8.000000e-04
+     fun: 9.46642750964106
+     jac: array([2.476588, 3.822367])
+ message: 'Optimization terminated successfully.'
+    nfev: 10
+     nit: 7
+    njev: 7
+  status: 0
+ success: True
+       x: array([3.822367, 2.476588])
+Estimated pf for Stress: 1.780000e-03
+Estimated pf for Displa: 1.360000e-03
+     fun: 9.411884961938323
+     jac: array([2.512454, 3.746092])
+ message: 'Optimization terminated successfully.'
+    nfev: 10
+     nit: 8
+    njev: 8
+  status: 0
+ success: True
+       x: array([3.746092, 2.512454])
+Estimated pf for Stress: 2.410000e-03
+Estimated pf for Displa: 1.210000e-03
+     fun: 9.576345609300292
+     jac: array([2.553363, 3.750484])
+ message: 'Optimization terminated successfully.'
+    nfev: 9
+     nit: 6
+    njev: 6
+  status: 0
+ success: True
+       x: array([3.750484, 2.553363])
+Estimated pf for Stress: 9.600000e-04
+Estimated pf for Displa: 3.200000e-04
+     fun: 9.518193266617724
+     jac: array([2.503968, 3.801244])
+ message: 'Optimization terminated successfully.'
+    nfev: 24
+     nit: 11
+    njev: 11
+  status: 0
+ success: True
+       x: array([3.801244, 2.503968])
+Estimated pf for Stress: 1.320000e-03
+Estimated pf for Displa: 7.400000e-04
+     fun: 9.51097236362621
+     jac: array([2.554613, 3.723058])
+ message: 'Optimization terminated successfully.'
+    nfev: 102
+     nit: 28
+    njev: 28
+  status: 0
+ success: True
+       x: array([3.723058, 2.554613])
+Estimated pf for Stress: 1.380000e-03
+Estimated pf for Displa: 5.000000e-04
+     fun: 9.466720370676972
+     jac: array([2.514749, 3.764479])
+ message: 'Optimization terminated successfully.'
+    nfev: 88
+     nit: 26
+    njev: 26
+  status: 0
+ success: True
+       x: array([3.764479, 2.514749])
+Estimated pf for Stress: 1.830000e-03
+Estimated pf for Displa: 9.000000e-04
+     fun: 9.54297096202418
+     jac: array([2.465733, 3.870236])
+ message: 'Optimization terminated successfully.'
+    nfev: 4
+     nit: 4
+    njev: 4
+  status: 0
+ success: True
+       x: array([3.870236, 2.465733])
+Estimated pf for Stress: 1.160000e-03
+Estimated pf for Displa: 1.090000e-03
+     fun: 9.633638317326053
+     jac: array([2.474058, 3.893861])
+ message: 'Optimization terminated successfully.'
+    nfev: 20
+     nit: 8
+    njev: 8
+  status: 0
+ success: True
+       x: array([3.893861, 2.474058])
+Estimated pf for Stress: 6.600000e-04
+Estimated pf for Displa: 5.800000e-04
+Sample Mean
+[5.000000e+02 1.000000e+03 2.904674e+07 4.001595e+04]
+Sample Std Dev
+[1.000000e+02 1.000000e+02 1.466651e+06 2.051221e+03]
+
+Exact Objective: 9.51402360
+
+Sample Count: 100
+Objective Mean: 9.52838373
+Objective SD:   0.05737919
+Objective CoV:  0.00602192
+Reliability (stress) Mean: 0.99869300
+Reliability (stress) SD:   0.00043334
+Reliability (stress) CoV:  0.00043391
+Prob. of Failure (stress) Mean: 0.00130700
+Prob. of Failure (stress) SD:   0.00043334
+Prob. of Failure (stress) CoV:  0.33155502
+Reliability (disp) Mean: 0.99912500
+Reliability (disp) SD:   0.00034688
+Reliability (disp) CoV:  0.00034719
+Prob. of Failure (disp) Mean: 0.00087500
+Prob. of Failure (disp) SD:   0.00034688
+Prob. of Failure (disp) CoV:  0.39643836
+Thickness Mean: 3.81998412
+Thickness SD:   0.05509953
+Thickness CoV:  0.01442402
+Width Mean: 2.49474863
+Width SD:   0.03106693
+Width CoV:  0.01245293
+/home/rick/anaconda2/lib/python2.7/site-packages/matplotlib/axes/_base.py:2787: UserWarning: Attempting to set identical left==right results
+in singular transformations; automatically expanding.
+left=100, right=100
+  'left=%s, right=%s') % (left, right))
+

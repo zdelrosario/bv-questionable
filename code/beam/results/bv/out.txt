@@ -1,0 +1,79 @@
+Exact Objective: 9.51402360
+
+Sample Count: 20
+Objective Mean: 10.42067245
+Objective SD:   0.23197997
+Objective CoV:  0.02226152
+Reliability (stress) Mean: 0.99999350
+Reliability (stress) SD:   0.00001768
+Reliability (stress) CoV:  0.00001768
+Reliability (disp) Mean: 0.99999675
+Reliability (disp) SD:   0.00000565
+Reliability (disp) CoV:  0.00000565
+
+Sample Count: 50
+Objective Mean: 10.24545570
+Objective SD:   0.12984742
+Objective CoV:  0.01267366
+Reliability (stress) Mean: 0.99998975
+Reliability (stress) SD:   0.00001695
+Reliability (stress) CoV:  0.00001695
+Reliability (disp) Mean: 0.99999050
+Reliability (disp) SD:   0.00000835
+Reliability (disp) CoV:  0.00000835
+
+Sample Count: 100
+Objective Mean: 10.17026807
+Objective SD:   0.08414391
+Objective CoV:  0.00827352
+Reliability (stress) Mean: 0.99998400
+Reliability (stress) SD:   0.00001947
+Reliability (stress) CoV:  0.00001947
+Reliability (disp) Mean: 0.99998875
+Reliability (disp) SD:   0.00000714
+Reliability (disp) CoV:  0.00000714
+
+Sample Count: 200
+Objective Mean: 10.11208461
+Objective SD:   0.05412710
+Objective CoV:  0.00535271
+Reliability (stress) Mean: 0.99997100
+Reliability (stress) SD:   0.00001562
+Reliability (stress) CoV:  0.00001562
+Reliability (disp) Mean: 0.99998625
+Reliability (disp) SD:   0.00000764
+Reliability (disp) CoV:  0.00000764
+
+Sample Count: 500
+Objective Mean: 10.06004070
+Objective SD:   0.03301429
+Objective CoV:  0.00328173
+Reliability (stress) Mean: 0.99995575
+Reliability (stress) SD:   0.00001159
+Reliability (stress) CoV:  0.00001160
+Reliability (disp) Mean: 0.99996900
+Reliability (disp) SD:   0.00001300
+Reliability (disp) CoV:  0.00001300
+
+Sample Count: 1000
+Objective Mean: 10.05037733
+Objective SD:   0.02078596
+Objective CoV:  0.00206818
+Reliability (stress) Mean: 0.99995225
+Reliability (stress) SD:   0.00000570
+Reliability (stress) CoV:  0.00000570
+Reliability (disp) Mean: 0.99996125
+Reliability (disp) SD:   0.00000640
+Reliability (disp) CoV:  0.00000640
+
+Sample Count: 2000
+Objective Mean: 10.03484223
+Objective SD:   0.01468052
+Objective CoV:  0.00146295
+Reliability (stress) Mean: 0.99994975
+Reliability (stress) SD:   0.00000418
+Reliability (stress) CoV:  0.00000418
+Reliability (disp) Mean: 0.99995800
+Reliability (disp) SD:   0.00000510
+Reliability (disp) CoV:  0.00000510
+
