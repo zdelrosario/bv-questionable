@@ -1,5 +1,5 @@
 # bv-questionable
-Companion repo for article "Basis Values Have Questionable Value"
+Companion repo for various articles:
 
 # Dependencies
 Core dependencies are Python with Numpy / Scipy and Matplotlib; I prefer to manage these dependencies through [Anaconda Python](https://www.anaconda.com/what-is-anaconda/). We also use a number of convenience functions available through a [python package](https://github.com/zdelrosario/pyutil), which can be easily disabled if desired.
