@@ -1,0 +1,1 @@
+The primary script in this directory is `ensemble_cantilever.py`, which runs an ensemble of RBDO cantilever beam problems, and saves the results to the data directory. Simply run the script from the command line.
