@@ -1,6 +1,10 @@
 # bv-questionable
 Companion repo for various articles:
 
+* [cutting2018] del Rosario, Fenrich, and Iaccarino, "Cutting the Double Loop: Theory and Algorithms for Reliability-Based Design Optimization with Statistical Uncertainty" (2018, Accepted) NME, [pre-print](https://arxiv.org/abs/1806.00048)
+
+* [beyond[2019] del Rosario, Fenrich, and Iaccarino, "Beyond Basis Values: Fast Precision Margin with FORM" (2019) 20th AIAA Non-Deterministic Approaches Conference
+
 # Dependencies
 Core dependencies are Python with Numpy / Scipy and Matplotlib; I prefer to manage these dependencies through [Anaconda Python](https://www.anaconda.com/what-is-anaconda/). We also use a number of convenience functions available through a [python package](https://github.com/zdelrosario/pyutil), which can be easily disabled if desired.
 
@@ -14,9 +18,10 @@ The repo is organized as follows:
 `./               # Root directory`  
 
 `./code/`  
-`./code/beam/     # Generates results for cantilever beam problem`  
-`./code/genfig/   # Generates figures from saved data files`  
-`./code/tension/  # Generates results for uniaxial tension problem`  
+`./code/beam/     # Generates results for cantilever beam problem using MIP,  from [cutting2018]`  
+`./code/genfig/   # Generates figures from saved data files,                  from [cutting2018]`  
+`./code/tension/  # Generates results for uniaxial tension problem, using MIP from [cutting2018]` 
+`./code/form/     # Generates results for cantilever beam problem using BIM,  from [beyond2019]`
 
 `./data/          # Output directory for data files`  
 
